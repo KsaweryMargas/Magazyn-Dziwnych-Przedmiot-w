@@ -1,1 +1,1 @@
-# Magazyn-Dziwnych-Przedmiot-w
+# Magazyn-Dziwnych-Przedmiotow
