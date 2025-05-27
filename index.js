@@ -22,3 +22,16 @@ class Item {
         } , null, 4);
     }
 }
+
+class Warehouse {
+    constructor(capacity, maxTotalWeight) {
+        this.capacity = capacity; // Maksymalna liczba przedmiotów 
+        this.maxTotalWeight = parseFloat(maxTotalWeight.toFixed(3)); // Maksymalna waga całkowita
+        this.currentItemCount = 0; // Liczba przedmiotów w magazynie
+        this.items = []; // Tablica ktora przechowuje przedmioty
+    }
+        
+      getCurrentWeight() {
+        return this.items.reduce((sum, item) => sum + item.weightKg, 0);
+    }
+}
