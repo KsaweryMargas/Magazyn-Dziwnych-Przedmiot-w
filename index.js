@@ -34,4 +34,30 @@ class Warehouse {
       getCurrentWeight() {
         return this.items.reduce((sum, item) => sum + item.weightKg, 0);
     }
+
+    // Metoda dodaje przedmiot do magazynu
+    addItem(item) {
+
+        // Sprawdza czy magazyn jest pełny
+        if (this.currentItemCount >= this.capacity) {
+            return "Magazyn jest pełny, nie można dodać więcej przedmiotów.";
+        }
+
+        // Sprawdza czy nie przekroczono makymalnej wagi
+        if (this.getCurrentWeight() + item.weightKg > this.maxTotalWeight) {
+            return "Przekroczono maksymalną wagę magazynu.";
+        }
+
+        this.items.push(item);// Dodaje przedmiot do magazynu
+        this.currentItemCount++; // Dodaje do licznika plus 1 gdy przedmiot zostanie dodany
+        return `Dodano przedmiot: ${item.name}`; // Zwraca Zdanie że przedmiot został dodany
+    }
+
+    // Metoda wypisuje przedmioty w magazynie
+    listAll() {
+        this.items.forEach((item, i) => {
+            console.log(`Przedmiot #${i + 1}:`); // Wypisuje w konsoli informacje przedmiotu
+            console.log(item.describe());
+    });
+  }
 }
