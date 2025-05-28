@@ -1,6 +1,6 @@
 const readline = require('readline');
 
-// Definicja klasy Item
+// Klasa Item
 class Item {
     // Przyjmuje nazwe, wage w kg, poziom dziwności i informację o delikatności
     constructor(name, weightKg, weirdnessLevel, isFragile) 
@@ -23,6 +23,7 @@ class Item {
     }
 }
 
+// Klasa Warehouse
 class Warehouse {
     constructor(capacity, maxTotalWeight) {
         this.capacity = capacity; // Maksymalna liczba przedmiotów 
@@ -61,3 +62,16 @@ class Warehouse {
     });
   }
 }
+    // Funkcja do interakcji z użytkownikiem
+    const rl = readline.createInterface ({
+
+    // Ustawia wejście i wyjście dla readline
+    input: process.stdin,
+    output: process.stdout
+});
+    // Funkcja askQuestion zadaje pyanie uzytkownikowi
+    function askQuestion(query) {
+    // Zwraca odpowiedz uzytkownika
+    return new Promise(resolve => rl.question(query, answer => resolve(answer)));
+}
+
