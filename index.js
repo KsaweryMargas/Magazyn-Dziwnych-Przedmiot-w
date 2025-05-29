@@ -62,7 +62,7 @@ class Warehouse {
     });
   }
 }
-    // Funkcja do interakcji z użytkownikiem
+    // Funkcja do interakcji z uzytkownikiem
     const rl = readline.createInterface ({
 
     // Ustawia wejście i wyjście dla readline
@@ -74,4 +74,41 @@ class Warehouse {
     // Zwraca odpowiedz uzytkownika
     return new Promise(resolve => rl.question(query, answer => resolve(answer)));
 }
+    // funkcja ktora odpala program
+    async function main() {
+    
+    // Pobiera pojemnosc magazynu 
+    const capacity = parseInt(await askQuestion("Podaj pojemność magazynu: "));
+    // Pobiera maksymalna wage
+    const maxWeight = parseFloat(await askQuestion("Podaj maksymalną łączną wagę magazynu (kg): "));
+    
+    // Tworzy nowy obiekt 
+    const warehouse = new Warehouse(capacity, maxWeight);
 
+    // Pobiera informacje takie jak, nazwa przedmiotu, wage, dziwnosc i czy jest delikatna 
+    const name = await askQuestion("Podaj nazwę przedmiotu: ");
+    const weight = parseFloat(await askQuestion("Podaj wagę przedmiotu (kg): "));
+    const weirdness = parseInt(await askQuestion("Podaj poziom dziwności (1-10): "));
+
+    // Sprawdza czy przedmiot jest delikatny
+    const isFragile = (await askQuestion("Czy przedmiot jest delikatny? (tak/nie): ")).toLowerCase() === "tak";
+
+    // tworzy przedmiot na podstawie danych 
+    const item = new Item(name, weight, weirdness, isFragile);
+
+    // Dodaje przedmiot i wypisuje rezultat czy przedmiot jest dodany czy nie
+    const result = warehouse.addItem(item);
+
+    // Wypisuje rezultat dodanego przedmiotu
+    console.log(result.message);
+
+    // Pokazuje zawartosc magazynu
+    console.log("\nZawartość magazynu:");
+    warehouse.listAll();
+
+    // Zamyka interferjs readline
+    rl.close();
+}
+
+// Odpala funkcje main
+main();
